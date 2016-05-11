@@ -17,17 +17,19 @@ module('EmberDataSailsInitializer', {
 
 test('it setups injections of the socket service', function (assert) {
   initialize(container, application);
-  var cont = application.__container__;
-  assert.deepEqual(cont.typeInjections.controller.pop(), {
-    fullName: 'service:sails-socket',
-    property: 'sailsSocket'
+
+  var cont = application.__registry__;
+  
+  assert.deepEqual(cont._typeInjections.controller.pop(), {
+    property: 'sailsSocket',
+    fullName: 'service:sailsSocket'
   }, 'the service should have injection setup on all controllers');
-  assert.deepEqual(cont.typeInjections.adapter.pop(), {
-    fullName: 'service:sails-socket',
+  assert.deepEqual(cont._typeInjections.adapter.pop(), {
+    fullName: 'service:sailsSocket',
     property: 'sailsSocket'
   }, 'the service should have injection setup on all adapters');
-  assert.deepEqual(cont.typeInjections.route.pop(), {
-    fullName: 'service:sails-socket',
+  assert.deepEqual(cont._typeInjections.route.pop(), {
+    fullName: 'service:sailsSocket',
     property: 'sailsSocket'
   }, 'the service should have injection setup on all routes');
 });
